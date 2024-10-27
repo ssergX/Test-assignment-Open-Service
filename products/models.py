@@ -27,11 +27,11 @@ class ProductType(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
-    price = models.ForeignKey(Price, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
     barcode = models.CharField(max_length=50)
     last_updated = models.DateTimeField(auto_now=True)
     product_type = models.ForeignKey(ProductType, on_delete=models.SET_NULL, null=True)
+    price = models.OneToOneField(Price, on_delete=models.CASCADE, related_name="products")
 
     class Meta:
         verbose_name = "Товар"
